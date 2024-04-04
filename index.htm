@@ -82,14 +82,36 @@
             font-weight: bold;
         }
 
-        .body_sec {
+        /* .body_sec {
             margin-left: 20px;
             margin-bottom: 30%;
-        }
+        } */
         .logo{
             filter: invert();
         }
         
+        .body_sec {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ajusta la altura según tus necesidades */
+        }
+
+        /* .mov {
+            display: flex;
+            flex-direction: column;
+        } */
+
+        .center {
+            align-self: center;
+        }
+
+        .button {
+            margin: 10px; /* Ajusta el espacio entre los botones */
+        }
+        .buttons {
+            margin-left: 40px; /* Ajusta el espacio entre los botones */
+        }
     </style>
 </head>
 
@@ -122,7 +144,17 @@
     <!-- Body section -->
     <main class="body_sec">
         <section id="Content" >
-            <h3>Content section</h3>
+            <div class="estado">
+
+            </div>
+                <div class="mov">
+                    <svg class="buttons" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256" onclick="enviarComando('adelante')" ><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm37.66-101.66a8,8,0,0,1-11.32,11.32L136,107.31V168a8,8,0,0,1-16,0V107.31l-18.34,18.35a8,8,0,0,1-11.32-11.32l32-32a8,8,0,0,1,11.32,0Z"></path></svg>
+                    <br>
+                    <svg class="button center" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256" onclick="enviarComando('izquierda')"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a8,8,0,0,1-8,8H107.31l18.35,18.34a8,8,0,0,1-11.32,11.32l-32-32a8,8,0,0,1,0-11.32l32-32a8,8,0,0,1,11.32,11.32L107.31,120H168A8,8,0,0,1,176,128Z"></path></svg>
+                    <svg class="button center" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256" onclick="enviarComando('derecha')"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-93.66a8,8,0,0,1,0,11.32l-32,32a8,8,0,0,1-11.32-11.32L148.69,136H88a8,8,0,0,1,0-16h60.69l-18.35-18.34a8,8,0,0,1,11.32-11.32Z"></path></svg>
+                    <br>
+                    <svg class="buttons" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256" onclick="enviarComando('abajo')"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm37.66-85.66a8,8,0,0,1,0,11.32l-32,32a8,8,0,0,1-11.32,0l-32-32a8,8,0,0,1,11.32-11.32L120,148.69V88a8,8,0,0,1,16,0v60.69l18.34-18.35A8,8,0,0,1,165.66,130.34Z"></path></svg>
+                </div>
             
         </section>
     </main>
@@ -134,6 +166,18 @@
     </footer> 
 </body>
 </html>
-
-<!DOCTYPE html>
-<html>
+<script>
+    function enviarComando(comando) {
+        console.log(comando);
+        fetch('http://192.168.4.1:12345/?cmd=' + comando)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al enviar el comando');
+                }
+                // Maneja la respuesta si es necesaria
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
